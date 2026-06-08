@@ -91,3 +91,29 @@ def estadisticas(paises):
     print("Cantidad de países por continente:")
     for cont, cant in continentes.items():
         print(f"{cont}: {cant}")
+# 6. Buscar país - (Matias)
+# Busca un país específico por nombre y muestra sus datos detallados:
+def buscar_pais(paises):
+    nombre = input("Ingrese el nombre del país a buscar: ").strip()
+    for pais in paises:
+        if pais["nombre"].lower() == nombre.lower():
+            print("\n--- PAÍS ENCONTRADO ---")
+            print(f"Nombre: {pais['nombre']}")
+            print(f"Continente: {pais['continente']}")
+            print(f"Población: {pais['poblacion']}")
+            print(f"Superficie: {pais['superficie']}")
+            return
+    print("País no encontrado.")
+
+# 7. Ordenar países - (Matias)
+# Ordena la lista de países por población de menor a mayor usando el método burbuja:
+def ordenar_paises(paises):
+    n = len(paises)
+    for i in range(n):
+        for j in range(0, n - i - 1):
+            if paises[j]["poblacion"] > paises[j + 1]["poblacion"]:
+                aux = paises[j]
+                paises[j] = paises[j + 1]
+                paises[j + 1] = aux
+    print("\nPaíses ordenados por población de menor a mayor.")
+    mostrar_paises(paises)
