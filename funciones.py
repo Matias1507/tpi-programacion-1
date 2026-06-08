@@ -117,3 +117,25 @@ def ordenar_paises(paises):
                 paises[j + 1] = aux
     print("\nPaíses ordenados por población de menor a mayor.")
     mostrar_paises(paises)
+
+# 8. Eliminar país (Baja) 
+# Busca un país por nombre y lo remueve de la lista del sistema:
+def eliminar_pais(paises):
+    nombre = input("Ingrese el nombre del país a eliminar: ").strip()
+    for pais in paises:
+        if pais["nombre"].lower() == nombre.lower():
+            paises.remove(pais)
+            print(f"País {pais['nombre']} eliminado correctamente.")
+            return
+    print("País no encontrado.")
+
+# 9. Guardar cambios en CSV 
+# Sobreescribe el archivo paises.csv con los datos actuales de la lista:
+def guardar_paises(nombre_archivo, paises):
+    with open(nombre_archivo, mode='w', newline='', encoding='utf-8') as archivo:
+        campos = ["nombre", "poblacion", "superficie", "continente"]
+        escritor = csv.DictWriter(archivo, fieldnames=campos)
+        escritor.writeheader()
+        for pais in paises:
+            escritor.writerow(pais)
+    print("Cambios guardados en el archivo CSV correctamente.")
