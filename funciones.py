@@ -1,5 +1,5 @@
 
-# 1. Lectura del archivo CSV - (Rolando)
+# 1. Lectura del archivo CSV 
 # Crear una función que abra paises.csv.
 # Leerlo línea por línea con csv.reader.
 # Convertir población y superficie a enteros con try/except.
@@ -91,7 +91,7 @@ def estadisticas(paises):
     print("Cantidad de países por continente:")
     for cont, cant in continentes.items():
         print(f"{cont}: {cant}")
-# 6. Buscar país - (Matias)
+# 6. Buscar país 
 # Busca un país específico por nombre y muestra sus datos detallados:
 def buscar_pais(paises):
     nombre = input("Ingrese el nombre del país a buscar: ").strip()
@@ -105,7 +105,7 @@ def buscar_pais(paises):
             return
     print("País no encontrado.")
 
-# 7. Ordenar países - (Matias)
+# 7. Ordenar países 
 # Ordena la lista de países por población de menor a mayor usando el método burbuja:
 def ordenar_paises(paises):
     n = len(paises)
