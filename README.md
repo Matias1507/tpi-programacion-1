@@ -5,20 +5,17 @@
 
 Este es nuestro proyecto final para la materia Programación 1. Es un programa de consola interactivo hecho en Python que lee una base de datos de países desde un archivo CSV y permite gestionarlos (dar de alta, modificar, borrar, buscar, filtrar por continente y ver estadísticas).
 
----
 
 ### Integrantes
 * Walter Matias Kurtz
 * Rolando Alanis
 
----
 
 ### Enlaces del Proyecto (Obligatorios)
 
 * **Video de la defensa en YouTube:** [Link al video acá](AGREGAR_LINK_DEL_VIDEO)
 * **Informe técnico en PDF:** [Descargar PDF](./Consigna_TPI_Prog-1.docx.pdf)
 
----
 
 ### Reparto de tareas en el código
 
@@ -38,7 +35,6 @@ Para organizarnos el trabajo, nos dividimos las funciones del sistema de la sigu
 * Eliminar un país de la lista.
 * Guardar los cambios definitivos de vuelta en el archivo CSV al actualizar o salir del programa.
 
----
 
 ### Archivos del repositorio
 
@@ -46,7 +42,6 @@ Para organizarnos el trabajo, nos dividimos las funciones del sistema de la sigu
 * `funciones.py`: Tiene toda la lógica y los bloques de código de cada función que creamos.
 * `paises.csv`: El archivo de texto plano con los datos de los países que usa el programa.
 
----
 
 ### Cómo ejecutar el programa
 
