@@ -1,9 +1,5 @@
 import csv
 
-# 1. Lectura del archivo CSV - (Rolando)
-# Crear una función que abra paises.csv.
-# Leerlo línea por línea con csv.reader.
-# Convertir población y superficie a enteros con try/except.
 def cargar_paises(nombre_archivo):
     paises = []
     with open(nombre_archivo, newline='', encoding='utf-8') as archivo:
