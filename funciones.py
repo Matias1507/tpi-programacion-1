@@ -1,6 +1,7 @@
+# Repositorio de Github https://github.com/Matias1507/tpi-programacion-1/tree/main
+
 import csv
 
-# 1. Cargar países desde el archivo CSV
 def cargar_paises(nombre_archivo):
     paises = []
     with open(nombre_archivo, newline='', encoding='utf-8') as archivo:
@@ -48,7 +49,7 @@ def agregar_pais(paises):
         print("Error: población y superficie deben ser números.")
 
 # 4. Actualizar datos - (Rolando)
-# Busca un país y modifica población o superficie:
+# Busca un país y modifies población o superficie:
 def actualizar_pais(paises):
     nombre = input("Ingrese el nombre del país a actualizar: ").strip()
     for pais in paises:
@@ -67,52 +68,31 @@ def actualizar_pais(paises):
             return
     print("País no encontrado.")
 
-# 5. Estadísticas e Indicadores - (Rolando)
-# Genera el reporte analítico calculando extremos, promedios y distribución por continente de forma manual:
+# 5. Estadísticas - (Rolando)
+# Calcula mayor/menor población, promedios y cantidad por continente:
 def estadisticas(paises):
     if not paises:
-        print("No hay países registrados para calcular estadísticas.")
+        print("No hay países cargados.")
         return
+        
+    mayor = max(paises, key=lambda x: x["poblacion"])
+    menor = min(paises, key=lambda x: x["poblacion"])
+    promedio_poblacion = sum(p["poblacion"] for p in paises) / len(paises)
+    promedio_superficie = sum(p["superficie"] for p in paises) / len(paises)
 
-    pais_mayor_pob = paises[0]
-    pais_menor_pob = paises[0]
-    total_poblacion = 0
-    total_superficie = 0
-    continentes_contador = {}
+    print("\n--- ESTADÍSTICAS ---")
+    print(f"Mayor población: {mayor['nombre']} ({mayor['poblacion']})")
+    print(f"Menor población: {menor['nombre']} ({menor['poblacion']})")
+    print(f"Promedio población: {promedio_poblacion:.2f}")
+    print(f"Promedio superficie: {promedio_superficie:.2f}")
 
+    # Cantidad de países por continente
+    continentes = {}
     for p in paises:
-        if p["poblacion"] > pais_mayor_pob["poblacion"]:
-            pais_mayor_pob = p
-            
-        if p["poblacion"] < pais_menor_pob["poblacion"]:
-            pais_menor_pob = p
-
-        total_poblacion += p["poblacion"]
-        total_superficie += p["superficie"]
-
-        continente = p["continente"]
-        if continente in continentes_contador:
-            continentes_contador[continente] += 1
-        else:
-            continentes_contador[continente] = 1
-
-    cantidad_total_paises = len(paises)
-    promedio_poblacion = total_poblacion / cantidad_total_paises
-    promedio_superficie = total_superficie / cantidad_total_paises
-
-    print("\n" + "="*45)
-    print("         REPORTE ESTADÍSTICO DEL SISTEMA")
-    print("="*45)
-    print(f"País con mayor población: {pais_mayor_pob['nombre']} ({pais_mayor_pob['poblacion']} hab.)")
-    print(f"País con menor población: {pais_menor_pob['nombre']} ({pais_menor_pob['poblacion']} hab.)")
-    print("-"*45)
-    print(f"Promedio de población general: {promedio_poblacion:.2f} hab.")
-    print(f"Promedio de superficie general: {promedio_superficie:.2f} km²")
-    print("-"*45)
-    print("Distribución exacta de países por continente:")
-    for cont, cant in continentes_contador.items():
-        print(f" - {cont}: {cant} país(es)")
-    print("="*45 + "\n")
+        continentes[p["continente"]] = continentes.get(p["continente"], 0) + 1
+    print("Cantidad de países por continente:")
+    for cont, cant in continentes.items():
+        print(f"{cont}: {cant}")
 
 # 6. Buscar país - (Matias)
 # Busca un país específico por nombre y muestra sus datos detallados:
@@ -166,7 +146,7 @@ def eliminar_pais(paises):
     print("País no encontrado.")
 
 # 10. Guardar cambios en CSV - (Matias)
-# Sobreescribe el archivo CSV con los datos actuales de la lista:
+# Sobreescribe el archivo paises.csv con los datos actuales de la lista:
 def guardar_paises(nombre_archivo, paises):
     with open(nombre_archivo, mode='w', newline='', encoding='utf-8') as archivo:
         campos = ["nombre", "poblacion", "superficie", "continente"]
