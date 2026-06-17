@@ -1,50 +1,105 @@
 import csv
 
+# 1. Cargar países desde el archivo CSV
+def cargar_paises(nombre_archivo):
+    paises = []
+    with open(nombre_archivo, newline='', encoding='utf-8') as archivo:
+        lector = csv.DictReader(archivo)
+        for fila in lector:
+            try:
+                paises.append({
+                    "nombre": fila["nombre"],
+                    "poblacion": int(fila["poblacion"]),
+                    "superficie": int(fila["superficie"]),
+                    "continente": fila["continente"]
+                })
+            except ValueError:
+                print(f"Error al convertir datos de {fila['nombre']}")
+    return paises
+
+# 2. Mostrar países - (Rolando)
+# Imprime todos los países cargados:
+def mostrar_paises(paises):
+    print("\n--- LISTA DE PAÍSES ---")
+    for pais in paises:
+        print(f"{pais['nombre']} - {pais['continente']} - Población: {pais['poblacion']} - Superficie: {pais['superficie']}")
+
+# 3. Agregar país (Alta) - (Rolando)
+# Permite sumar un país nuevo validando que no haya campos vacíos:
+def agregar_pais(paises):
+    nombre = input("Nombre del país: ").strip()
+    continente = input("Continente: ").strip()
+    poblacion = input("Población: ").strip()
+    superficie = input("Superficie: ").strip()
+
+    if not nombre or not continente or not poblacion or not superficie:
+        print("Error: no se permiten campos vacíos.")
+        return
+
+    try:
+        paises.append({
+            "nombre": nombre,
+            "continente": continente,
+            "poblacion": int(poblacion),
+            "superficie": int(superficie)
+        })
+        print(f"País {nombre} agregado correctamente.")
+    except ValueError:
+        print("Error: población y superficie deben ser números.")
+
+# 4. Actualizar datos - (Rolando)
+# Busca un país y modifica población o superficie:
+def actualizar_pais(paises):
+    nombre = input("Ingrese el nombre del país a actualizar: ").strip()
+    for pais in paises:
+        if pais["nombre"].lower() == nombre.lower():
+            campo = input("¿Qué desea actualizar? (poblacion/superficie): ").strip().lower()
+            if campo in ["poblacion", "superficie"]:
+                nuevo_valor = input(f"Ingrese nuevo valor para {campo}: ")
+                try:
+                    override_valor = int(nuevo_valor)
+                    pais[campo] = override_valor
+                    print(f"{campo} de {nombre} actualizado correctamente.")
+                except ValueError:
+                    print("Error: debe ingresar un número.")
+            else:
+                print("Campo inválido.")
+            return
+    print("País no encontrado.")
+
 # 5. Estadísticas e Indicadores - (Rolando)
 # Genera el reporte analítico calculando extremos, promedios y distribución por continente de forma manual:
 def estadisticas(paises):
-    # Validación de seguridad por si la lista está vacía
     if not paises:
         print("No hay países registrados para calcular estadísticas.")
         return
 
-    # Inicializamos variables testigo con el primer elemento de la lista (índice 0)
-    # Asumimos temporalmente que el primero es el mayor, el menor y arrancamos las sumas
     pais_mayor_pob = paises[0]
     pais_menor_pob = paises[0]
-    
     total_poblacion = 0
     total_superficie = 0
-    
-    # Diccionario acumulador dinámico para contar los países por continente
     continentes_contador = {}
 
-    # Recorrido secuencial e iterativo de la lista principal
     for p in paises:
-        # Algoritmo de búsqueda de extremos (reemplaza a max() y min() con lambda)
         if p["poblacion"] > pais_mayor_pob["poblacion"]:
-            pais_mayor_pob = p  # Actualizamos el registro del mayor
+            pais_mayor_pob = p
             
         if p["poblacion"] < pais_menor_pob["poblacion"]:
-            pais_menor_pob = p  # Actualizamos el registro del menor
+            pais_menor_pob = p
 
-        # Sumatorias aritméticas para determinar los promedios generales
         total_poblacion += p["poblacion"]
         total_superficie += p["superficie"]
 
-        # Lógica del diccionario acumulador para la distribución por continente
         continente = p["continente"]
         if continente in continentes_contador:
             continentes_contador[continente] += 1
         else:
             continentes_contador[continente] = 1
 
-    # Cálculo final de los promedios generales
     cantidad_total_paises = len(paises)
     promedio_poblacion = total_poblacion / cantidad_total_paises
     promedio_superficie = total_superficie / cantidad_total_paises
 
-    # Despliegue de los indicadores e informes por consola
     print("\n" + "="*45)
     print("         REPORTE ESTADÍSTICO DEL SISTEMA")
     print("="*45)
