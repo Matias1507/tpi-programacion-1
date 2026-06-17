@@ -3,12 +3,12 @@ import csv
 # 5. Estadísticas e Indicadores - (Rolando)
 # Genera el reporte analítico calculando extremos, promedios y distribución por continente de forma manual:
 def estadisticas(paises):
-    # 1. Validación de seguridad por si la lista está vacía
+    # Validación de seguridad por si la lista está vacía
     if not paises:
         print("No hay países registrados para calcular estadísticas.")
         return
 
-    # 2. Inicializamos variables testigo con el primer elemento de la lista (índice 0)
+    # Inicializamos variables testigo con el primer elemento de la lista (índice 0)
     # Asumimos temporalmente que el primero es el mayor, el menor y arrancamos las sumas
     pais_mayor_pob = paises[0]
     pais_menor_pob = paises[0]
@@ -19,7 +19,7 @@ def estadisticas(paises):
     # Diccionario acumulador dinámico para contar los países por continente
     continentes_contador = {}
 
-    # 3. Recorrido secuencial e iterativo de la lista principal
+    # Recorrido secuencial e iterativo de la lista principal
     for p in paises:
         # Algoritmo de búsqueda de extremos (reemplaza a max() y min() con lambda)
         if p["poblacion"] > pais_mayor_pob["poblacion"]:
@@ -39,12 +39,12 @@ def estadisticas(paises):
         else:
             continentes_contador[continente] = 1
 
-    # 4. Cálculo final de los promedios generales
+    # Cálculo final de los promedios generales
     cantidad_total_paises = len(paises)
     promedio_poblacion = total_poblacion / cantidad_total_paises
     promedio_superficie = total_superficie / cantidad_total_paises
 
-    # 5. Despliegue de los indicadores e informes por consola
+    # Despliegue de los indicadores e informes por consola
     print("\n" + "="*45)
     print("         REPORTE ESTADÍSTICO DEL SISTEMA")
     print("="*45)
@@ -111,7 +111,12 @@ def eliminar_pais(paises):
     print("País no encontrado.")
 
 # 10. Guardar cambios en CSV - (Matias)
-# Sobreescribe el archivo paises.csv con los datos actuales de la lista:
+# Sobreescribe el archivo CSV con los datos actuales de la lista:
 def guardar_paises(nombre_archivo, paises):
     with open(nombre_archivo, mode='w', newline='', encoding='utf-8') as archivo:
-        campos =
+        campos = ["nombre", "poblacion", "superficie", "continente"]
+        escritor = csv.DictWriter(archivo, fieldnames=campos)
+        escritor.writeheader()
+        for pais in paises:
+            escritor.writerow(pais)
+    print("Cambios guardados en el archivo CSV correctamente.")
