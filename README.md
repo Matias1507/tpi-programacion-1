@@ -13,7 +13,7 @@ Este es nuestro proyecto final para la materia Programación 1. Es un programa d
 
 ### Enlaces del Proyecto (Obligatorios)
 
-* **Video de la defensa en YouTube:** [Link al video acá](https://drive.google.com/file/d/1y5w5kyCogO9PpUin-RR2wLkmPvFzDYcv/view?usp=sharing)
+* **Video de la defensa en Drive:** [Link al video acá](https://drive.google.com/file/d/1y5w5kyCogO9PpUin-RR2wLkmPvFzDYcv/view?usp=sharing)
 * **Informe técnico en PDF:** [Descargar PDF](Consigna_TPI_Prog-1.docx.pdf.pdf)
 
 
